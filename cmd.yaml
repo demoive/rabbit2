@@ -1,0 +1,23 @@
+
+
+g:
+  desc: does a google search. we could fallback to yubnub, but why do an unnecessary roundtrip for something as common as a google search?
+  aliases:
+    - goog
+    - goog
+  exec: !!js/function >
+    function (args) {
+      return 'http://www.google.com/search?q=' + encodeURIComponent(args);;
+    }
+
+
+echo:
+  desc: returns back what you give to it
+  aliases:
+  exec: !!js/function >
+    function (args) {
+      return 'http://www.google.com/search?q=' + encodeURIComponent(args);;
+    }
+
+
+

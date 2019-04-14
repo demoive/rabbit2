@@ -1,0 +1,26 @@
+
+doctype html
+
+html(lang=en)
+  head
+    title bunny1 - list of commands
+    meta(
+      name=description, content="A cool thing made with Glitch"
+    )
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name=viewport, content="width=device-width,initial-scale=1")
+  body
+
+    // b: i 10 Most Popular Commands
+    // br
+    // <b>list</b> used 1 times (show the list of methods you can use or search that list)
+
+    // hr
+
+    b: i All Commands
+    table
+      each cmd in cmds
+        tr
+          td: b: =cmd.name
+          td: !=cmd.desc
