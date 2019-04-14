@@ -1,0 +1,23 @@
+{
+  "name": "bunny1js",
+  "version": "0.1.2",
+  "description": "Command shortcuts for your browser.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "pug": "^2.0.3"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express",
+    "bunny1"
+  ]
+}
