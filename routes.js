@@ -13,7 +13,7 @@ module.exports = function (app) {
 
       // Sometimes query strings arrive with pluses for spaces.
       // This ensures all pluses are encoded correctly so that the decode functions works as expected.
-      const queryStringPluses = URL.parse(req.url).query;
+      const queryStringPluses = URL.parse(req.url).query || '';
       const queryStringEncoded = queryStringPluses.replace(/\+/g, '%20');
       const intentString = decodeURIComponent(queryStringEncoded);
 
