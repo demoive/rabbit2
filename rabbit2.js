@@ -1,13 +1,6 @@
-// const fs = require('fs');
-// const yaml = require('js-yaml');
 
 module.exports.invokeCommand = function (intentCmd, intentArgs) {
-  const cmdDirectory = require('./cmd');
-  // try {
-  //   cmdDirectory = yaml.safeLoad(fs.readFileSync('./cmd.yaml', 'utf8'));
-  // } catch (e) {
-  //   console.error(e);
-  // }
+  const cmdDirectory = require('./commands');
 
   intentArgs = intentArgs || [];
 
@@ -17,12 +10,12 @@ module.exports.invokeCommand = function (intentCmd, intentArgs) {
   if (cmdObj !== undefined) {
     var redirectUrl = cmdObj.exec(intentArgs);
     //this.logCommandUsage(intentCmd, intentArgs);
-    
+
     // If the command returns a URL, redirect to it.
     if (redirectUrl !== undefined) {
       this.serverResponse
-        .set('x-bunny1-cmd', intentCmd)
-        .set('x-bunny1-arg', intentArgs)
+        .set('x-rabbit2-cmd', intentCmd)
+        .set('x-rabbit2-arg', intentArgs)
         .redirect(redirectUrl);
     } else {
       // Expectation is that the cmd's exec function sends a server response.
@@ -49,18 +42,14 @@ module.exports.invokeCommand = function (intentCmd, intentArgs) {
     }
   }
 
-  // // If command doesn't exist, delegate it to yubnub.
-  // intentArgs.unshift(intentCmd);
-  // this.serverResponse.redirect(`https://yubnub.org/parser/parse?command=${intentArgs.join(' ')}`);
-
   // If command doesn't exist, treat it as if it were a Google search.
   intentArgs.unshift(intentCmd);
-  this.invokeCommand('g', intentArgs);
+  this.invokeCommand('google', intentArgs);
 
   // // If command doesn't exist, respond with a 400.
   // this.serverResponse
   //   .status(400)
-  //   .send(`<b>${intentCmd}</b> not found.`);
+  //   .send(`<b>${intentCmd}</b> not found.<br>Try <a href="/?list"><b>list</b>ing</a> all available commands.`);
 
   return;
 }

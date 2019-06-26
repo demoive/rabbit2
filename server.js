@@ -1,5 +1,5 @@
-
 const express = require('express');
+const routes = require('./routes');
 
 const app = express();
 
@@ -7,11 +7,13 @@ const app = express();
 app.set('view engine', 'pug');
 
 // Support serving static files from the `/public/` directory.
-app.use(express.static('public'));
+//app.use(express.static('public'));
 
 // Register the routes.
-const routes = require('./routes.js');
-routes(app);
+//routes(app);
+//app.route('/').get(routes.commandTriage);
+app.get('/',              routes.commandTriage);
+app.get('/commands.json', routes.commandDirectoryJson);
 
 // Begin listening for HTTP requests.
 const server = app.listen(process.env.PORT, () => {

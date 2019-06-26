@@ -1,0 +1,9 @@
+- respect whitespace in arguments
+- add meta commands?
+- contributing (in readme and separate file).
+- replace logging with cmd counter
+- remove pug dependency?
+- render markup2html for readme? or a homepage?
+- Installation instructions for firefox, safari.
+- package this up in a Chrome Extension to run locally?
+- credits/powered by/view source in list view

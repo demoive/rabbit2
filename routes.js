@@ -1,34 +1,42 @@
 
-const bunny1 = require('./bunny1');
+/**
+ * Root of the server.
+ * Invoke commands specified by a query string.
+ * If no query string, shows a list of available commands.
+ */
+module.exports.commandTriage = function (req, res) {
+  //const intentString = req.params.intent; // /i/:intent
+  const URL = require('url');
 
-module.exports = function (app) {
+  const rabbit2 = require('./rabbit2');
+  rabbit2.serverResponse = res; // Expose the server's response object in rabbit2.
 
-  // Root of the server.
-  // Invoke commands by specify a query string.
-  // If no query string, serves a helpful page (README).
-  app.route('/')
-    .get(function (req, res) {
-      //const intentString = req.params.intent; // /i/:intent
-      const URL = require('url');
+  // Sometimes query strings arrive with pluses for spaces.
+  // This ensures all pluses are encoded correctly so that the decode functions works as expected.
+  const queryStringPluses = URL.parse(req.url).query || '';
+  const queryStringEncoded = queryStringPluses.replace(/\+/g, '%20');
+  const intentString = decodeURIComponent(queryStringEncoded);
 
-      // Sometimes query strings arrive with pluses for spaces.
-      // This ensures all pluses are encoded correctly so that the decode functions works as expected.
-      const queryStringPluses = URL.parse(req.url).query || '';
-      const queryStringEncoded = queryStringPluses.replace(/\+/g, '%20');
-      const intentString = decodeURIComponent(queryStringEncoded);
+  if (!intentString) {
+    //res.sendFile(__dirname + '/README.md');
+    rabbit2.invokeCommand('list');
+    return;
+  }
 
-      if (!intentString) {
-        res.sendFile(__dirname + '/README.md');
-        return;
-      }
+  // Tokenise the intent to extract the command and possible arguments.
+  var intentArgs = intentString.split(/\s+/);
+  var intentCmd = intentArgs.shift();
 
-      // Tokenise the intent to extract the command and possible arguments.
-      var intentArgs = intentString.split(/\s+/);
-      var intentCmd = intentArgs.shift();
+  rabbit2.logCommandUsage(intentCmd, intentArgs);
+  rabbit2.invokeCommand(intentCmd, intentArgs);
+}
 
-      bunny1.serverResponse = res; // Expose the server's response object in bunny1.
-      bunny1.logCommandUsage(intentCmd, intentArgs);
-      bunny1.invokeCommand(intentCmd, intentArgs);
-    });
 
-};
+/**
+ * Returns the command directory as a JSON.
+ */
+module.exports.commandDirectoryJson = function (req, res) {
+  const cmdDirectory = require('./commands');
+
+  res.json(cmdDirectory);
+}
