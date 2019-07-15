@@ -1,17 +1,17 @@
 # rabbit2
 
-Command shortcuts for your browser.
+Programmable command shortcuts for your browser.
 
-At work, we live in the browser -- so much of what we do starts with opening a new tab and typing something into the search bar. What if the browser we could do more than just search Google or bring up a history of websites we've visited before?
+At work, we live in the browser -- so much of what we do starts with opening a new tab and typing something into the search bar. What if the browser location bar allowed us to do more than just search Google or bring up a history of websites we've visited before?
 
 Meet rabbit2. A tool enabling anyone to simplify and automate most of their common/daily actions through their browser. It bootstraps your efficiency, launching you into your intended task.
 
 ## Installation
 
-The intended use case:
+The intended use case involves two separate steps:
 
 1. Deploy this project to your own server, preferably in your organisation's internal network.
-2. Set it up as a default "search engine" in your browser to facilitate its use.
+2. Set up your new server as a "search engine" in your browser's settings.
 
 ### 1. Deploying on your server
 
@@ -73,7 +73,7 @@ Gotcha [covered here](./CONTRIBUTING.md).
 
 I know, it's a bit of strange concept. It's similar to slash-commands in [Slack](https://api.slack.com/slash-commands) or [Telegram](https://core.telegram.org/bots#commands) but accessible in _any_ browser bar. Plus, it's much easier to create and customise.
 
-All of these are debatably ways to describe this tool:
+Debatably, all of these are ways to describe this tool:
 
 - 💬 A one-time "chat bot" with the entire Internet.
 - 🤖 A configurable bot, summoned in your browser.
@@ -86,7 +86,7 @@ All of these are debatably ways to describe this tool:
 
 ### How does this work?
 
-On a technical level, this project is a ligthweight web server along with a collection of mini-subroutines. Pass a query string to this server and that will identify which of these micro-functions to run (with optional arguments).
+On a technical level, this project is a ligthweight web server along with a collection of mini-subroutines. Pass a query string to the server root and that will identify which of these micro-functions to run (optionally, with arguments).
 
 The typical behaviour of each command is to redirect to specific URL but their functionality can extend to conceivably anything. There's a good explanation and example use cases in [this blog post](http://www.ccheever.com/blog/?p=74) which speaks about the inspiration this project derives from, the original bunny1.
 
