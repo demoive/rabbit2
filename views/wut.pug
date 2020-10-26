@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>rabbit2 - Glossary definitions (wut)</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width,initial-scale=1">
+  </head>
+  <body>
+
+    <b><i>Phrases</i></b>
+    <p><form onSubmit="alert(prompt('Definition of '+this.term.value+' please:'));return false;"><input name="term" placeholder="Term"><button>Create New</button></form></p>
+    <table>
+
+      each term in terms
+        <tr>
+          <td>
+            <b>
+              =term.phrase
+            </b>
+            <i>
+              =term.votes_up.length
+            </i>
+          </td>
+          <td>
+            <span style="color:grey;">
+              !=term.definition
+            <span>
+          </td>
+        </tr>
+
+    </table>
+  </body>
+</html>

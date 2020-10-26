@@ -1,7 +1,12 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
+
 const routes = require('./routes');
 
 const app = express();
+
+// Allow usage of cookies.
+app.use(cookieParser());
 
 // Allow rendering of files with the pug template engine. 
 app.set('view engine', 'pug');

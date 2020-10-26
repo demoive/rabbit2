@@ -9,8 +9,9 @@ module.exports.commandTriage = function (req, res) {
   const URL = require('url');
 
   const rabbit2 = require('./rabbit2');
+  rabbit2.serverRequest = req; // Expose the server's request object in rabbit2.
   rabbit2.serverResponse = res; // Expose the server's response object in rabbit2.
-
+  
   // Sometimes query strings arrive with pluses for spaces.
   // This ensures all pluses are encoded correctly so that the decode functions works as expected.
   const queryStringPluses = URL.parse(req.url).query || '';
@@ -27,7 +28,7 @@ module.exports.commandTriage = function (req, res) {
   var intentArgs = intentString.split(/\s+/);
   var intentCmd = intentArgs.shift();
 
-  rabbit2.logCommandUsage(intentCmd, intentArgs);
+  //rabbit2.logCommandUsage(intentCmd, intentArgs);
   rabbit2.invokeCommand(intentCmd, intentArgs);
 }
 
