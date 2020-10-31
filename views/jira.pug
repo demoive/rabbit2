@@ -9,10 +9,11 @@
   <body>
 
     script.
+      var jiraProjNum = #{issueNumber};
       var jiraProjKey = prompt('What is your JIRA project key?');
 
       if (jiraProjKey) {
-        location.href = location.origin + '/?jira ' + jiraProjKey + #{issueNumber};
+        location.href = location.origin + '/?jira ' + jiraProjKey + jiraProjNum;
       }
 
   </body>

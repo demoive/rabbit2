@@ -21,7 +21,6 @@ Download the project and in the root directory run the following:
 npm install
 npm start
 ```
-
 You're done!
 
 The URL you set up for the server _should_ only be accessible on a LAN or VPN. Why, because this isn't intended to be a public resource, we already have [yubnub](https://yubnub.org/) for that.
@@ -51,15 +50,11 @@ Coming soon...
 #### Safari
 
 Coming soon...
-<!-- http://marioestrada.github.io/safari-omnikey/ -->
 
-<!--
-### Objectives
+[//]: # (http://marioestrada.github.io/safari-omnikey/)
 
-- Utility
-- Simplicity
-- Extensibiliy
--->
+
+[//]: # (### Objectives: Utility, Simplicity, Extensibiliy)
 
 ---
 
@@ -107,7 +102,7 @@ The best way to get started is to copy an existing command. In order of complexi
 - `commands/google.js`: basic redirection and alias functionality.
 - `commands/echo.js`: basic custom server response content.
 - `commands/list.js`: advanced server response content (using a template page).
-- `commands/jira.js`: advanced alias functionality.
+- `commands/jira.js`: advanced alias and cookie functionality.
 
 A more complete explanation of each part that makes up a command is documented in `commands/index.js`. Honestly, there's not much else beyond that. It's quite straightforward, simple and flexible!
 

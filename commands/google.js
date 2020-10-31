@@ -6,7 +6,8 @@ module.exports = {
   usage: 'google|g {search_term}',
 
   aliases: {
-    "^g(?:\\s+(\\S+))?$" : "$1",
+    "^g$" : "",
+    "^g\\s+" : "",
   },
 
   exec: function (args) {
