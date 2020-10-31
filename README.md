@@ -67,7 +67,6 @@ Coming soon...
 
 [//]: # (http://marioestrada.github.io/safari-omnikey/)
 
-
 [//]: # (### Objectives: Utility, Simplicity, Extensibiliy)
 
 ---
@@ -75,6 +74,20 @@ Coming soon...
 ## Contributing
 
 Gotcha [covered here](./CONTRIBUTING.md).
+
+## Roadmap
+
+- wut command
+- replace logging with cmd counter
+- support persistance information with db layer (crud api in each command?)
+- respect whitespace in arguments
+- add meta commands?
+- contributing (in readme and separate file).
+- remove pug dependency?
+- render markup2html for readme? or a homepage?
+- installation instructions for firefox, safari.
+- package this up in a Chrome Extension to run locally?
+- credits/powered by/view source in list view
 
 ## FAQ
 
@@ -120,6 +133,15 @@ The best way to get started is to copy an existing command. In order of complexi
 - `commands/gsuite.js`: support for command options.
 
 A more complete explanation of each part that makes up a command is documented in `commands/index.js`. Honestly, there's not much else beyond that. It's quite straightforward, simple and flexible!
+
+The only files you should touch are:
+
+```
+commands/  # Place all the code for your command under one file here, using the example structure in index.js.
+views/     # Commands that serve a page rather than redirect, use a file here with the same name as the command.
+.env       # Add any information specific to your environment here.
+.data/     # Persistent data storage.
+```
 
 ### Why not make this a public service?
 
