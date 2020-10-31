@@ -1,7 +1,10 @@
+- wut :: Add command
+
+- replace logging with cmd counter
+- support persistance information with db layer (crud api in each command?)
 - respect whitespace in arguments
 - add meta commands?
 - contributing (in readme and separate file).
-- replace logging with cmd counter
 - remove pug dependency?
 - render markup2html for readme? or a homepage?
 - Installation instructions for firefox, safari.

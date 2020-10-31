@@ -9,6 +9,7 @@ module.exports.commandTriage = function (req, res) {
   const URL = require('url');
 
   const rabbit2 = require('./rabbit2');
+  rabbit2.serverRequest = req; // Expose the server's request object in rabbit2.
   rabbit2.serverResponse = res; // Expose the server's response object in rabbit2.
 
   // Sometimes query strings arrive with pluses for spaces.
