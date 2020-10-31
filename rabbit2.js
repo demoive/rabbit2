@@ -3,7 +3,7 @@ module.exports.invokeCommand = function (intentCmd, intentArgs) {
   const cmdDirectory = require('./commands');
 
   intentArgs = intentArgs || [];
-console.log(intentCmd, intentArgs);
+
   const cmdObj = cmdDirectory[intentCmd.toLowerCase()];
 
   // Checks for a _literal_ match of the intended command.
