@@ -121,13 +121,6 @@ The best way to get started is to copy an existing command. In order of complexi
 
 A more complete explanation of each part that makes up a command is documented in `commands/index.js`. Honestly, there's not much else beyond that. It's quite straightforward, simple and flexible!
 
-```
-commands/  # 
-views/     #
-.env       # Add any information specific to your environment here.
-.data/.    # Persistent data storage.
-```
-
 ### Why not make this a public service?
 
 I won't stop you. But keep in mind that [yubnub](https://yubnub.org/) already exists ([more about its origins](http://jonaquino.blogspot.com/2005/06/yubnub-my-entry-for-rails-day-24-hour.html?m=1)). Secondly, there are often URLs and functionality that organisations want/need to keep private. This project enables you to spin this up for your organisation with low effort.
