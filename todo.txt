@@ -1,4 +1,5 @@
 - wut :: Add command
+- html command
 
 - replace logging with cmd counter
 - support persistance information with db layer (crud api in each command?)

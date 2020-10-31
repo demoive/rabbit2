@@ -1,8 +1,6 @@
-<!--
-https://gist.github.com/PurpleBooth/b24679402957c63ec426
-https://gist.github.com/briandk/3d2e8b3ec8daf5a27a62
-https://guides.github.com/introduction/flow/index.html
--->
+[//]: # (https://gist.github.com/PurpleBooth/b24679402957c63ec426)
+[//]: # (https://gist.github.com/briandk/3d2e8b3ec8daf5a27a62)
+[//]: # (https://guides.github.com/introduction/flow/index.html)
 
 For code contributions, submit pull requests to https://github.com/demoive/rabbit2.
 

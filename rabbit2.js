@@ -3,7 +3,7 @@ module.exports.invokeCommand = function (intentCmd, intentArgs) {
   const cmdDirectory = require('./commands');
 
   intentArgs = intentArgs || [];
-
+console.log(intentCmd, intentArgs);
   const cmdObj = cmdDirectory[intentCmd.toLowerCase()];
 
   // Checks for a _literal_ match of the intended command.
@@ -26,14 +26,14 @@ module.exports.invokeCommand = function (intentCmd, intentArgs) {
 
   // Checks for an _alias_ match (regex-based) of intended command.
   // If matched, the matched string is replaced with the specified replace pattern
-  // and this text is used as a single argument invoked on the same command.
+  // and is passed as the argument invoked on the same command.
   for (let [cmdKey, cmdObj] of Object.entries(cmdDirectory)) {
     for (let [aliasRegexString, replacePattern] of Object.entries(cmdObj.aliases)) {
       let fullIntent = `${intentCmd} ${intentArgs.join(' ')}`.trim();
       let regexp = new RegExp(aliasRegexString);
 
       if (fullIntent.match(regexp)) {
-        let replacedArgs = fullIntent.replace(regexp, replacePattern).split();
+        let replacedArgs = fullIntent.replace(regexp, replacePattern).split(' ');
 
         this.invokeCommand(cmdKey, replacedArgs);
 
@@ -42,7 +42,7 @@ module.exports.invokeCommand = function (intentCmd, intentArgs) {
     }
   }
 
-  // If command doesn't exist, treat it as if it were a Google search.
+  // If there's no match for the command, treat the original intent (cmd + args) as if it were a Google search.
   intentArgs.unshift(intentCmd);
   this.invokeCommand('google', intentArgs);
 

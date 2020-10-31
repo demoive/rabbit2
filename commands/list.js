@@ -6,7 +6,8 @@ module.exports = {
   usage: 'list|ls [{search_terms}]',
 
   aliases: {
-    "^ls(?:\\s+(\\S+))?$" : "$1",
+    "^ls$" : "",
+    "^ls\\s+" : "",
   },
 
   exec: function (args) {

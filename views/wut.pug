@@ -1,34 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>rabbit2 - Available commands (list)</title>
+    <title>rabbit2 - Glossary definitions (wut)</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width,initial-scale=1">
   </head>
   <body>
 
-    // b: i 10 Most Popular Commands
-    // br
-    // <b>list</b> used 1 times (show the list of methods you can use or search that list)
-    // hr
-
-    <b><i>All Commands</i></b>
+    <b><i>Phrases</i></b>
+    <p><form onSubmit="alert(prompt('Definition of '+this.term.value+' please:'));return false;"><input name="term" placeholder="Term"><button>Create New</button></form></p>
     <table>
 
-      each cmd in cmds
+      each term in terms
         <tr>
           <td>
             <b>
-              =cmd.name
+              =term.phrase
             </b>
+            <i>
+              =term.votes_up.length
+            </i>
           </td>
           <td>
-            <code style="background-color:lightgrey">
-              =cmd.usage
-            </code>
             <span style="color:grey;">
-              !=cmd.desc
+              !=term.definition
             <span>
           </td>
         </tr>
