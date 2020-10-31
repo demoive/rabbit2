@@ -28,7 +28,7 @@ module.exports.commandTriage = function (req, res) {
   var intentArgs = intentString.split(/\s+/);
   var intentCmd = intentArgs.shift();
 
-  rabbit2.logCommandUsage(intentCmd, intentArgs);
+  //rabbit2.logCommandUsage(intentCmd, intentArgs);
   rabbit2.invokeCommand(intentCmd, intentArgs);
 }
 
