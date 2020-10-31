@@ -15,33 +15,20 @@ The intended use case involves two separate steps:
 
 ### 1. Deploying on your server
 
-#### Development
-
-In Glitch, you don't have to do anything! Just go to the URL for your project (`https://rabbit2.glitch.me/`).
-
-To run locally, download the project and in the root directory run the following:
+Download the project and in the root directory run the following:
 
 ```
 npm install
 npm start
 ```
 
-#### Production
+You're done!	
 
-Each server environment has their own steps to deploy. As this project is set up for use with Firebase, here are the commands for deploying to Firebase. Execute these from the Glitch Console:
-
-```
-npm install -g firebase-tools
-firebase login --no-localhost
-firebase init functions
-firebase deploy --only functions -m "Deploying the best new feature ever."
-```
-
-The URL you set up for the server _should_ only be accessible on a LAN or VPN. Why? Because this isn't intended to be a public resource, we already have [yubnub](https://yubnub.org/) for that.
+The URL you set up for the server _should_ only be accessible on a LAN or VPN. Why, because this isn't intended to be a public resource, we already have [yubnub](https://yubnub.org/) for that.
 
 ### 2. Browser shortcut
 
-With your server up and running you can already access rabbit2. People are meant to access it through their browser's address bar so they should set up rabbit2 as a "search engine" in their browser.
+With your server up and running you can already access rabbit2. Since people are meant to access it through their browser's address bar, set up rabbit2 as a "search engine" in your browser.
 
 #### Google Chrome
 
@@ -117,16 +104,9 @@ The best way to get started is to copy an existing command. In order of complexi
 - `commands/echo.js`: basic custom server response content.
 - `commands/list.js`: advanced server response content (using a template page).
 - `commands/jira.js`: advanced alias and cookie functionality.
-- `commands/gs.js`: support for command options.
+- `commands/gsuite.js`: support for command options.
 
 A more complete explanation of each part that makes up a command is documented in `commands/index.js`. Honestly, there's not much else beyond that. It's quite straightforward, simple and flexible!
-
-```
-commands/  # 
-views/     #
-.env       # Add any information specific to your environment here.
-.data/.    # Persistent data storage.
-```
 
 ### Why not make this a public service?
 
