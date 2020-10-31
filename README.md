@@ -103,6 +103,7 @@ The best way to get started is to copy an existing command. In order of complexi
 - `commands/echo.js`: basic custom server response content.
 - `commands/list.js`: advanced server response content (using a template page).
 - `commands/jira.js`: advanced alias and cookie functionality.
+- `commands/gsuite.js`: support for command options.
 
 A more complete explanation of each part that makes up a command is documented in `commands/index.js`. Honestly, there's not much else beyond that. It's quite straightforward, simple and flexible!
 
