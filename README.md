@@ -15,16 +15,12 @@ The intended use case involves two separate steps:
 
 ### 1. Deploying on your server
 
-#### Development
-
 Download the project and in the root directory run the following:
 
 ```
 npm install
 npm start
 ```
-
-#### Production
 
 You're done!
 
