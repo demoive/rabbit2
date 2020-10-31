@@ -1,7 +1,7 @@
 
 module.exports = {
 
-  desc: 'Search Giphy.com for gifs 👾!',
+  desc: 'Search Giphy.com for gifs!',
 
   usage: 'giphy {search_terms}',
 
