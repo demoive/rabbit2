@@ -21,7 +21,7 @@ Download the project and in the root directory run the following:
 npm install
 npm start
 ```
-You're done!	
+You're done!
 
 The URL you set up for the server _should_ only be accessible on a LAN or VPN. Why, because this isn't intended to be a public resource, we already have [yubnub](https://yubnub.org/) for that.
 
