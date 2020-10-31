@@ -1,4 +1,4 @@
-const JIRA_BASE_URL = 'https://glovoapp.atlassian.net'; //https://jira.atlassian.net
+const JIRA_BASE_URL = 'https://jira.atlassian.net';
 const COOKIE_JIRA_PREV_PROJ_KEY = 'rabbit2-jira-key-prev';
 
 
