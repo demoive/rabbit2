@@ -17,12 +17,10 @@
     <table>
 
       each cmd in cmds
-        <tr>
-          <td>
-            <b>
+        tr(data-usage-count=cmd.usageCount)
+          td
+            b
               =cmd.name
-            </b>
-          </td>
           <td>
             <code style="background-color:lightgrey">
               =cmd.usage
@@ -31,7 +29,6 @@
               !=cmd.desc
             <span>
           </td>
-        </tr>
 
     </table>
   </body>

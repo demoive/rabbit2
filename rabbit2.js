@@ -9,7 +9,8 @@ module.exports.invokeCommand = function (intentCmd, intentArgs) {
   // Checks for a _literal_ match of the intended command.
   if (cmdObj !== undefined) {
     var redirectUrl = cmdObj.exec(intentArgs);
-    //this.logCommandUsage(intentCmd, intentArgs);
+
+    incrementCmdUsageCount(intentCmd);
 
     // If the command returns a URL, redirect to it.
     if (redirectUrl !== undefined) {
@@ -55,16 +56,21 @@ module.exports.invokeCommand = function (intentCmd, intentArgs) {
 }
 
 
+
+
 /**
- * Rudimentary logging of commands. Mostly for investigation purposes.
- *
- * Should be turned into a simple/efficient counter to show the most popular commands.
+ * Increments the usage counter {cmd}.
  */
-module.exports.logCommandUsage = function (cmd, args) {
-  const fs = require('fs');
-  var logStream = fs.createWriteStream('log.txt', {'flags': 'a'}); // 'a' to append and 'w' to erase and write a new file
+function incrementCmdUsageCount(cmd) {
+  var count = module.exports.cmdUsageCount[cmd] || 0;
 
-  const now = new Date().toISOString();
-
-  logStream.write(`${now} ${cmd} ${args.join(' ')}\n`);
+  module.exports.cmdUsageCount[cmd] = count + 1;
 }
+
+const fs = require('fs');
+const PATH_CMD_USAGE_COUNT = './.data/cmdUsageCount.json';
+module.exports.cmdUsageCount = JSON.parse(fs.readFileSync(PATH_CMD_USAGE_COUNT)) || {};
+(function writeDb() {
+  fs.writeFileSync(PATH_CMD_USAGE_COUNT, JSON.stringify(module.exports.cmdUsageCount));
+  setTimeout(writeDb, 5000);
+})();
