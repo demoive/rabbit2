@@ -26,8 +26,8 @@ module.exports = {
 
   aliases: aliases,
 
-  run: function (runData) {
-    var cmdArgs = runData.args.slice(); // Shallow copy of the args array (for a possible manipulation later).
+  exec: function (args) {
+    var cmdArgs = args.slice(); // Shallow copy of the args array (for a possible manipulation later).
 
     var searchUrl = `${REDIRECT_URL_SEARCH}?`;
 

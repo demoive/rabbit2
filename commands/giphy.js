@@ -8,8 +8,8 @@ module.exports = {
   aliases: {
   },
 
-  run: function (runData) {
-    var searchTerms = encodeURIComponent(runData.args.join('-'));
+  exec: function (args) {
+    var searchTerms = encodeURIComponent(args.join('-'));
     // https://developers.giphy.com/docs/#translate-endpoint
 
     return `https://giphy.com/search/${searchTerms}`;

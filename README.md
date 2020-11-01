@@ -78,11 +78,9 @@ Gotcha [covered here](./CONTRIBUTING.md).
 ## Roadmap
 
 - wut command
-- replace logging with cmd counter
 - support persistance information with db layer (crud api in each command?)
 - respect whitespace in arguments
 - add meta commands?
-- contributing (in readme and separate file).
 - remove pug dependency?
 - render markup2html for readme? or a homepage?
 - installation instructions for firefox, safari.

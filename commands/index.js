@@ -16,9 +16,9 @@ var cmdDirectory = {
       "replace_string" // val: used as the replacement pattern the matched .
     },
 
-    run: function (runData) {  // Your business logic of your command. This function will receive an array of white-space-tokenised arguments.
+    exec: function (args) {  // Your business logic of your command. This function will receive an array of white-space-tokenised arguments.
       // In the typical scenario, your subroutine completes with a redirection to a URL. In this case, simply return a URL string and rabbit2 will execute the redirection.
-      // For more advanced cases (e.g. serving text/json, etc.), the Express response object is made available through runData.serverResponse giving you full control over to how handle requests.
+      // For more advanced cases (e.g. serving text/json, etc.), the Express response object is made available through rabbit2.serverResponse giving you full control over to how handle requests.
       // Note: _YOU NEED TO_ serve a response to the server if your function doesn't return a URL string.
     },
   },

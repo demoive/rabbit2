@@ -1,22 +1,25 @@
 
-module.exports.invokeCommand = function (runData) {
+module.exports.invokeCommand = function (intentCmd, intentArgs) {
   const cmdDirectory = require('./commands');
 
-  const cmdObj = cmdDirectory[runData.cmd];
+  intentArgs = intentArgs || [];
+
+  const cmdObj = cmdDirectory[intentCmd.toLowerCase()];
 
   // Checks for a _literal_ match of the intended command.
   if (cmdObj !== undefined) {
-    var redirectUrl = cmdObj.run(runData);
+    var redirectUrl = cmdObj.exec(intentArgs);
+
+    this.incrementCmdUsageCount(intentCmd);
 
     // If the command returns a URL, redirect to it.
     if (redirectUrl !== undefined) {
-      runData.serverResponse
-        .set('x-rabbit2-cmd', runData.cmd)
-        .set('x-rabbit2-arg', runData.args)
+      this.serverResponse
+        .set('x-rabbit2-cmd', intentCmd)
+        .set('x-rabbit2-arg', intentArgs)
         .redirect(redirectUrl);
     } else {
       // Expectation is that the cmd's exec function sends a server response.
-      // Perhaps we can send a generic (error?) response here as a fallback.
     }
 
     return;
@@ -27,44 +30,43 @@ module.exports.invokeCommand = function (runData) {
   // and is passed as the argument invoked on the same command.
   for (let [cmdKey, cmdObj] of Object.entries(cmdDirectory)) {
     for (let [aliasRegexString, replacePattern] of Object.entries(cmdObj.aliases)) {
+      let fullIntent = `${intentCmd} ${intentArgs.join(' ')}`.trim();
       let regexp = new RegExp(aliasRegexString);
 
-      if (runData.fullIntentString.match(regexp)) {
-        let replacedArgs = runData.fullIntentString.replace(regexp, replacePattern);
+      if (fullIntent.match(regexp)) {
+        let replacedArgs = fullIntent.replace(regexp, replacePattern).split(' ');
 
-        runData['cmd'] = cmdKey;
-        runData['args'] = replacedArgs.split(' ');
-        runData['argString'] = replacedArgs;
-
-        this.invokeCommand(runData);
+        this.invokeCommand(cmdKey, replacedArgs);
 
         return;
       }
     }
   }
 
-  // If there's no match for the command, treat the original intent as if it were a Google search.
-  this.invokeCommand('google', runData.fullIntentString);
+  // If there's no match for the command, treat the original intent (cmd + args) as if it were a Google search.
+  intentArgs.unshift(intentCmd);
+  this.invokeCommand('google', intentArgs);
 
   // // If command doesn't exist, respond with a 400.
-  // runData.serverResponse
+  // this.serverResponse
   //   .status(400)
-  //   .send(`<b>${runData.cmd}</b> not found.<br>Try <a href="/?list"><b>list</b>ing</a> all available commands.`);
+  //   .send(`<b>${intentCmd}</b> not found.<br>Try <a href="/?list"><b>list</b>ing</a> all available commands.`);
 
   return;
 }
 
 
 /**
- * Rudimentary logging of commands. Mostly for investigation purposes.
- *
- * Should be turned into a simple/efficient counter to show the most popular commands.
+ * Increments the usage counter {cmd}.
  */
-module.exports.logCommandUsage = function (cmd, args) {
+module.exports.incrementCmdUsageCount = function (cmd) {
   const fs = require('fs');
-  var logStream = fs.createWriteStream('log.txt', {'flags': 'a'}); // 'a' to append and 'w' to erase and write a new file
+  const path = './.data/cmdUsageCount.json';
 
-  const now = new Date().toISOString();
+  var db = JSON.parse(fs.readFileSync(path));
 
-  logStream.write(`${now} ${cmd} ${args.join(' ')}\n`);
+  var count = db[cmd] || 0;
+  db[cmd] = count + 1;
+
+  fs.writeFileSync(path, JSON.stringify(db));
 }

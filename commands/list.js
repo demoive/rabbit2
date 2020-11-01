@@ -10,9 +10,9 @@ module.exports = {
     "^ls\\s+" : "",
   },
 
-  run: function (runData) {
+  exec: function (args) {
     var cmds = [];
-    var filterTerms = runData.args.join('|');
+    var filterTerms = args.join('|');
 
     const cmdDirectory = require('./');
 
@@ -27,7 +27,8 @@ module.exports = {
       }
     });
 
-    runData.serverResponse.render('list', { cmds });
+    const rabbit2 = require('../rabbit2');
+    rabbit2.serverResponse.render('list', { cmds });
   },
 
 };

@@ -8,8 +8,9 @@ module.exports = {
   aliases: {
   },
 
-  run: function (runData) {
-    runData.serverResponse.send(runData.argString);
+  exec: function (args) {
+    const rabbit2 = require('../rabbit2');
+    rabbit2.serverResponse.send(args.join(' '));
   },
 
 };
