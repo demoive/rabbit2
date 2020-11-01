@@ -1,10 +1,10 @@
 
-module.exports.invokeCommand = function (intentCmd, intentArgs) {
-  const cmdDirectory = require('./commands');
+module.exports.cmdDirectory = require('./commands');
 
+module.exports.invokeCommand = function (intentCmd, intentArgs) {
   intentArgs = intentArgs || [];
 
-  const cmdObj = cmdDirectory[intentCmd.toLowerCase()];
+  const cmdObj = this.cmdDirectory[intentCmd.toLowerCase()];
 
   // Checks for a _literal_ match of the intended command.
   if (cmdObj !== undefined) {
@@ -28,7 +28,7 @@ module.exports.invokeCommand = function (intentCmd, intentArgs) {
   // Checks for an _alias_ match (regex-based) of intended command.
   // If matched, the matched string is replaced with the specified replace pattern
   // and is passed as the argument invoked on the same command.
-  for (let [cmdKey, cmdObj] of Object.entries(cmdDirectory)) {
+  for (let [cmdKey, cmdObj] of Object.entries(this.cmdDirectory)) {
     for (let [aliasRegexString, replacePattern] of Object.entries(cmdObj.aliases)) {
       let fullIntent = `${intentCmd} ${intentArgs.join(' ')}`.trim();
       let regexp = new RegExp(aliasRegexString);

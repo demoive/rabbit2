@@ -12,20 +12,20 @@ module.exports = {
 
   exec: function (args) {
     const rabbit2 = require('../rabbit2');
+    //const cmdDirectory = require('./');
 
     var cmds = [];
     var filterTerms = args.join('|');
 
-    const cmdDirectory = require('./');
 
-    Object.keys(cmdDirectory).forEach(function (cmdName) {
+    Object.keys(rabbit2.cmdDirectory).forEach(function (cmdName) {
       if (cmdName.match(filterTerms)) {
         cmds.push({
           name: cmdName,
           usageCount: rabbit2.cmdUsageCount[cmdName] || 0,
-          desc: cmdDirectory[cmdName].desc,
-          usage: cmdDirectory[cmdName].usage,
-          //aliases: cmdDirectory[cmdName].aliases,
+          desc: rabbit2.cmdDirectory[cmdName].desc,
+          usage: rabbit2.cmdDirectory[cmdName].usage,
+          //aliases: rabbit2.cmdDirectory[cmdName].aliases,
         });
       }
     });

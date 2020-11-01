@@ -1,3 +1,6 @@
+const URL = require('url');
+const rabbit2 = require('./rabbit2');
+
 
 /**
  * Root of the server.
@@ -6,9 +9,6 @@
  */
 module.exports.commandTriage = function (req, res) {
   //const intentString = req.params.intent; // /i/:intent
-  const URL = require('url');
-
-  const rabbit2 = require('./rabbit2');
   rabbit2.serverRequest = req; // Expose the server's request object in rabbit2.
   rabbit2.serverResponse = res; // Expose the server's response object in rabbit2.
 
@@ -36,7 +36,5 @@ module.exports.commandTriage = function (req, res) {
  * Returns the command directory as a JSON.
  */
 module.exports.commandDirectoryJson = function (req, res) {
-  const cmdDirectory = require('./commands');
-
-  res.json(cmdDirectory);
+  res.json(rabbit2.cmdDirectory);
 }
