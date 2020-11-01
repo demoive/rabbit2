@@ -36,6 +36,5 @@ module.exports.commandTriage = function (req, res) {
  * Returns the command directory as a JSON.
  */
 module.exports.commandDirectoryJson = function (req, res) {
-  console.log('json requested');
   res.json(rabbit2.cmdDirectory);
 }
