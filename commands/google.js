@@ -10,8 +10,8 @@ module.exports = {
     "^g\\s+" : "",
   },
 
-  exec: function (args) {
-    var searchTerms = encodeURIComponent(args.join(' '));
+  exec: function (runData) {
+    var searchTerms = encodeURIComponent(runData.argString);
 
     return `https://www.google.com/search?q=${searchTerms}`;
   },

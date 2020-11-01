@@ -7,10 +7,7 @@
 module.exports.commandTriage = function (req, res) {
   //const intentString = req.params.intent; // /i/:intent
   const URL = require('url');
-
   const rabbit2 = require('./rabbit2');
-  rabbit2.serverRequest = req; // Expose the server's request object in rabbit2.
-  rabbit2.serverResponse = res; // Expose the server's response object in rabbit2.
 
   // Sometimes query strings arrive with pluses for spaces.
   // This ensures all pluses are encoded correctly so that the decode functions works as expected.
@@ -29,7 +26,14 @@ module.exports.commandTriage = function (req, res) {
   var intentCmd = intentArgs.shift();
 
   //rabbit2.logCommandUsage(intentCmd, intentArgs);
-  rabbit2.invokeCommand(intentCmd, intentArgs);
+  rabbit2.invokeCommand({
+    cmd: intentCmd.toLowerCase(),
+    args: intentArgs || [],
+    argString: intentString.replace(/^\s*\S+\s/, ''),
+    fullIntentString: intentString,
+    serverResponse: res, // Expose the server's request object.
+    serverRequest: req,  // Expose the server's response object.
+  });
 }
 
 
@@ -38,6 +42,6 @@ module.exports.commandTriage = function (req, res) {
  */
 module.exports.commandDirectoryJson = function (req, res) {
   const cmdDirectory = require('./commands');
-
+console.log('json requested');
   res.json(cmdDirectory);
 }

@@ -12,25 +12,20 @@ module.exports = {
      "^btoa\\s+" : "-d ",
   },
 
-  exec: function (args) {
-    const rabbit2 = require('../rabbit2');
-
-    var argTokens = args.slice(); // Shallow copy of the args array (for a possible manipulation later).
+  run: function (runData) {
     var sourceString = '';
     var processedString = '';
 
-    if (argTokens.length >= 2 && argTokens[0] === '-d') {
-      argTokens.shift();
-      sourceString = argTokens.join(' ');
+    if (runData.args.length >= 2 && runData.args[0] === '-d') {
+      sourceString = runData.argString.replace(/^\s*-d\s/, '');
       processedString = Buffer.from(sourceString, 'base64').toString('ascii');
     }
 
     else {
-      sourceString = argTokens.join(' ');
-      processedString = Buffer.from(sourceString).toString('base64');
+      processedString = Buffer.from(runData.argString).toString('base64');
     }
 
-    rabbit2.serverResponse.send(processedString);
+    runData.serverResponse.send(processedString);
   },
 
 };

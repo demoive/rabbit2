@@ -1,24 +1,22 @@
 
-module.exports.invokeCommand = function (intentCmd, intentArgs) {
+module.exports.invokeCommand = function (runData) {
   const cmdDirectory = require('./commands');
 
-  intentArgs = intentArgs || [];
-
-  const cmdObj = cmdDirectory[intentCmd.toLowerCase()];
+  const cmdObj = cmdDirectory[runData.cmd];
 
   // Checks for a _literal_ match of the intended command.
   if (cmdObj !== undefined) {
-    var redirectUrl = cmdObj.exec(intentArgs);
-    //this.logCommandUsage(intentCmd, intentArgs);
+    var redirectUrl = cmdObj.run(runData);
 
     // If the command returns a URL, redirect to it.
     if (redirectUrl !== undefined) {
-      this.serverResponse
-        .set('x-rabbit2-cmd', intentCmd)
-        .set('x-rabbit2-arg', intentArgs)
+      runData.serverResponse
+        .set('x-rabbit2-cmd', runData.cmd)
+        .set('x-rabbit2-arg', runData.args)
         .redirect(redirectUrl);
     } else {
       // Expectation is that the cmd's exec function sends a server response.
+      // Perhaps we can send a generic (error?) response here as a fallback.
     }
 
     return;
@@ -29,27 +27,29 @@ module.exports.invokeCommand = function (intentCmd, intentArgs) {
   // and is passed as the argument invoked on the same command.
   for (let [cmdKey, cmdObj] of Object.entries(cmdDirectory)) {
     for (let [aliasRegexString, replacePattern] of Object.entries(cmdObj.aliases)) {
-      let fullIntent = `${intentCmd} ${intentArgs.join(' ')}`.trim();
       let regexp = new RegExp(aliasRegexString);
 
-      if (fullIntent.match(regexp)) {
-        let replacedArgs = fullIntent.replace(regexp, replacePattern).split(' ');
+      if (runData.fullIntentString.match(regexp)) {
+        let replacedArgs = runData.fullIntentString.replace(regexp, replacePattern);
 
-        this.invokeCommand(cmdKey, replacedArgs);
+        runData['cmd'] = cmdKey;
+        runData['args'] = replacedArgs.split(' ');
+        runData['argString'] = replacedArgs;
+
+        this.invokeCommand(runData);
 
         return;
       }
     }
   }
 
-  // If there's no match for the command, treat the original intent (cmd + args) as if it were a Google search.
-  intentArgs.unshift(intentCmd);
-  this.invokeCommand('google', intentArgs);
+  // If there's no match for the command, treat the original intent as if it were a Google search.
+  this.invokeCommand('google', runData.fullIntentString);
 
   // // If command doesn't exist, respond with a 400.
-  // this.serverResponse
+  // runData.serverResponse
   //   .status(400)
-  //   .send(`<b>${intentCmd}</b> not found.<br>Try <a href="/?list"><b>list</b>ing</a> all available commands.`);
+  //   .send(`<b>${runData.cmd}</b> not found.<br>Try <a href="/?list"><b>list</b>ing</a> all available commands.`);
 
   return;
 }

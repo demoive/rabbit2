@@ -8,12 +8,12 @@ module.exports = {
   aliases: {
   },
 
-  exec: function (args) {
-    if (args.length === 0) {
+  run: function (runData) {
+    if (runData.args.length === 0) {
       return 'https://drive.google.com/drive/my-drive';
     }
 
-    var searchTerms = encodeURIComponent(args.join(' '));
+    var searchTerms = encodeURIComponent(runData.args.join(' '));
 
     return `https://drive.google.com/drive/search?q=${searchTerms}`;
   },
