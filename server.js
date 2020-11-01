@@ -9,10 +9,12 @@ const app = express();
 app.use(cookieParser());
 
 // Allow rendering of files with the pug template engine. 
+app.set('views', './views');
 app.set('view engine', 'pug');
+//app.set('view engine', 'ejs');
 
 // Support serving static files from the `/public/` directory.
-//app.use(express.static('public'));
+//app.use(express.static('./public'));
 
 // Register the routes.
 //routes(app);
