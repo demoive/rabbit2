@@ -71,6 +71,10 @@ const fs = require('fs');
 const PATH_CMD_USAGE_COUNT = './.data/cmdUsageCount.json';
 module.exports.cmdUsageCount = JSON.parse(fs.readFileSync(PATH_CMD_USAGE_COUNT)) || {};
 (function writeDb() {
-  fs.writeFileSync(PATH_CMD_USAGE_COUNT, JSON.stringify(module.exports.cmdUsageCount));
+  fs.writeFile(PATH_CMD_USAGE_COUNT, JSON.stringify(module.exports.cmdUsageCount), function (err) {
+    if (err) {
+      throw err;
+    }
+  });
   setTimeout(writeDb, 5000);
 })();

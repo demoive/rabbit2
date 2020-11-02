@@ -78,6 +78,7 @@ Gotcha [covered here](./CONTRIBUTING.md).
 ## Roadmap
 
 - wut command
+- book (bookmark) command
 - support persistance information with db layer (crud api in each command?)
 - respect whitespace in arguments
 - add meta commands?
