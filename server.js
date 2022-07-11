@@ -1,3 +1,5 @@
+const functions = require('firebase-functions');
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
@@ -26,3 +28,5 @@ app.get('/commands.json', routes.commandDirectoryJson);
 const server = app.listen(process.env.PORT, () => {
   console.log('Server listening on port %s', server.address().port);
 });
+
+exports.app = functions.https.onRequest(app);

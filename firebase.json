@@ -1,0 +1,11 @@
+{
+  "functions": {
+  	"source": "/"
+  },
+  "hosting": {
+    "rewrites": [{
+      "source": "**",
+      "function": "app"
+    }]
+  }
+}

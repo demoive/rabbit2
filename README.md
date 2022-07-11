@@ -4,7 +4,7 @@ Programmable command shortcuts for your browser.
 
 At work, we live in the browser -- so much of what we do starts with opening a new tab and typing something into the search bar. What if the browser location bar allowed us to do more than just search Google or bring up a history of websites we've visited before?
 
-Meet rabbit2. A tool enabling anyone to simplify and automate most of their common/daily actions through their browser. It bootstraps your efficiency, launching you into your intended task.
+Meet rabbit2: A tool enabling anyone to simplify and automate most of their common/daily actions through their browser -- bootstraping efficiency.
 
 ## Installation
 
