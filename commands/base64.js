@@ -23,14 +23,16 @@ module.exports = {
       argTokens.shift();
       sourceString = argTokens.join(' ');
       processedString = Buffer.from(sourceString, 'base64').toString('ascii');
-    }
-
-    else {
+    } else {
       sourceString = argTokens.join(' ');
       processedString = Buffer.from(sourceString).toString('base64');
     }
 
-    rabbit2.serverResponse.send(processedString);
+    // Serves a page which displays the encoded string along with a convinient "copy to clipboard" button
+    rabbit2.serverResponse
+      .render('base64', { encodedString: processedString });
+    //rabbit2.serverResponse.send(processedString);
+
   },
 
 };
