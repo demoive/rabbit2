@@ -30,7 +30,10 @@ module.exports = {
     // If we can't determine a project key, prompt for it.
     if (!jiraProjKey) {
       // Serves a page which prompts (via JS) for the JIRA key and recalls `rabbit2 jira {key}-{number}`.
-      rabbit2.serverResponse.render('jira', { issueNumber: jiraProjNum });
+      rabbit2.serverResponse
+        // .set('x-rabbit2-cmd', 'jira')
+        // .set('x-rabbit2-arg', args)
+        .render('jira', { issueNumber: jiraProjNum });
 
       return;
     }
