@@ -1,0 +1,60 @@
+<%- include('../includes/header'); -%>
+
+<button
+  onClick='dictateText()'
+>Speak</button>
+
+<input
+  type="text"
+  name="dictate-text"
+  autofocus
+  value="<%- data.stringToDictate %>"
+>
+
+<select
+  onClick='populateSynthVoices()'
+  name="dictate-voice"
+>
+  <option>Load voices...</option>
+</select>
+
+<script>
+  var $dictateText = document.querySelector('input[name=dictate-text]');
+  var $voiceOptions = document.querySelector('select[name=dictate-voice]');
+
+  var voiceOptions;
+  var synthVoices;
+
+  var synth = window.speechSynthesis;
+
+  function populateSynthVoices() {
+    synthVoices = synth.getVoices();
+
+    synthVoices.sort(function (a, b) {
+      return a.lang.localeCompare(b.lang);
+    });
+
+    voiceOptions = [];
+    for (let [index, voice] of synthVoices.entries()) {
+      voiceOptions.push(`<option value="${index}" ${voice.default ? 'selected' : ''}>(${voice.lang}) ${voice.name}</option>`);
+    }
+    $voiceOptions.innerHTML = voiceOptions.join();
+
+    $voiceOptions.removeAttribute('onClick');
+  }
+
+  function dictateText() {
+    var utter = new SpeechSynthesisUtterance();
+
+    utter.text = $dictateText.value;
+
+    if (!synthVoices) {
+      populateSynthVoices();
+    }
+    utter.voice = synthVoices[$voiceOptions.selectedIndex];
+
+    synth.speak(utter);
+  }
+</script>
+
+<%- include('../includes/footer'); -%>

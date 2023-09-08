@@ -1,0 +1,27 @@
+<%- include('../includes/header'); -%>
+
+<button
+  style="display:block;"
+  onClick="copyString()"
+  autofocus
+>
+  Copy
+</button>
+
+<pre
+  style="white-space:pre-wrap;word-wrap:break-word;"
+><%- data.processedString %></pre>
+
+<script>
+  //document.querySelector('textarea').select();
+
+  function copyString() {
+    try {
+      navigator.clipboard.writeText("<%- data.processedString %>");
+    } catch (err) {
+      console.error('Failed to copy string.', err);
+    }
+  }
+</script>
+
+<%- include('../includes/footer'); -%>

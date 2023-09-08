@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+https://developer.mozilla.org/en-US/docs/Web/OpenSearch
+-->
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>rabbit2</ShortName>
+  <Description>Programmable command shortcuts for your browser</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://fct-rabbit2.glitch.me/favicon.ico</Image>
+  <Url type="text/html" template="https://fct-rabbit2.glitch.me/?{searchTerms}"/>
+  <Url type="application/json" rel="suggestions" template="https://fct-rabbit2.glitch.me/s/{searchTerms}" />
+</OpenSearchDescription>

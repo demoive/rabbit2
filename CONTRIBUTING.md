@@ -2,13 +2,22 @@
 [//]: # (https://gist.github.com/briandk/3d2e8b3ec8daf5a27a62)
 [//]: # (https://guides.github.com/introduction/flow/index.html)
 
-For code contributions, submit pull requests to https://github.com/demoive/rabbit2.
-
 ## New Commands
 
-Because the main use-case of rabbit2 is for use privately within an organisation, this repo  isn't intended to become a reference of all possible commands out there. That being said, if you've created a command that you feel others could benefit from, feel free to submit a pull request with your added command and we'll go from there. Your command entry should:
+Creating a new command is simple:
 
-- Have a descriptive... `description`.
-- Include `usage` instructions.
-- Not conflict with existing command names.
-- Not contain any identifiable URLs (use `process.env.VARIABLE`).
+- Create a new file in `/commands`.
+- Refer to the expected structure/fields documented in `/commands/index.js`.
+- It may help copy an existing command as a starting point.
+- That's it!
+
+### Tips
+
+- Keep the file name short and only use lowercase _letters_ -- it's used as the identifer for the command and what people will type.
+- Include all the relevant meta data: `name`, `summary`, `description`, `usage`, `author`, ...
+- Use `process.env.VARIABLE` to avoid any identifiable information in your file (e.g. URls or other sensitive data).
+- If you think other organisations could use your command (i.e. it's generic enough), please submit a pull request to the main repo: `https://github.com/demoive/rabbit2`.
+
+## Core functionality
+
+For code contributions, submit pull requests to `https://github.com/demoive/rabbit2`.

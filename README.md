@@ -4,7 +4,7 @@ Programmable command shortcuts for your browser.
 
 At work, we live in the browser -- so much of what we do starts with opening a new tab and typing something into the search bar. What if the browser location bar allowed us to do more than just search Google or bring up a history of websites we've visited before?
 
-Meet rabbit2: A tool enabling anyone to simplify and automate most of their common/daily actions through their browser -- bootstraping efficiency.
+Meet rabbit2: A tool enabling people to simplify and automate most common/daily actions in browser -- bootstraping efficiency.
 
 ## Installation
 
@@ -65,8 +65,6 @@ Coming soon...
 
 Coming soon...
 
-[//]: # (http://marioestrada.github.io/safari-omnikey/)
-
 [//]: # (### Objectives: Utility, Simplicity, Extensibiliy)
 
 ---
@@ -74,19 +72,6 @@ Coming soon...
 ## Contributing
 
 Gotcha [covered here](./CONTRIBUTING.md).
-
-## Roadmap
-
-- wut command
-- book (bookmark) command
-- support persistance information with db layer (crud api in each command?)
-- respect whitespace in arguments
-- add meta commands?
-- remove pug dependency? (ejs.co/)
-- render markup2html for readme? or a homepage?
-- installation instructions for firefox, safari.
-- package this up in a Chrome Extension to run locally?
-- credits/powered by/view source in list view
 
 ## FAQ
 
