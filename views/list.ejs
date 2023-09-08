@@ -1,0 +1,71 @@
+<%- include('../includes/header'); -%>
+
+<%
+// Sort by usage count descending.
+data.cmds.sort(function (a, b) {
+  var aCount = cmdRunCounts[a.id] || 0;
+  var bCount = cmdRunCounts[b.id] || 0;
+
+  return bCount - aCount;
+});
+   
+%>
+
+<table>
+  <% for (let cmd of data.cmds) { %>
+
+    <tr>
+      <td>
+          <span
+            class="cmd-id <%= cmd.hasSuggest ? 'cmd-has-suggest' : '' %>"
+            title="<%= cmdRunCounts[cmd.id] || 0 %>"
+            data-run-count="<%= cmdRunCounts[cmd.id] || 0 %>"
+          ><%= cmd.id %></span>
+          <!--
+          <br>
+          <% for (let [opKey, opDesc] of Object.entries(cmd.operators)) { %>
+           <span title="<%= opKey %>">.<%= opKey %></span><br>
+          <% } %>
+          -->
+      </td>
+      <td>
+        <%# cmd.hasRun ? "🏃" : "" %><%# cmd.hasSuggest ? "🔍" : "" %>
+      </td>
+      <td>
+        <!-- <span class="cmd-name"><%- cmd.name %>:</span> -->
+        <span class="cmd-summary"><%- cmd.summary %></span><br>
+        <code class="cmd-usage"><%= cmd.usage %></code>
+      </td>
+    </tr>
+
+  <% } %>
+</table>
+
+<p style="border-top:1px solid black">
+  <b class="cmd-has-suggest">hasSuggest</b>
+</p>
+
+
+
+
+<style>
+  body { font-family: monospace; }
+  td { vertical-align: top; }
+  .cmd-summary {
+    color: grey;
+    line-height: 1.3em;
+  }
+  .cmd-has-suggest { color: blue; }
+  .cmd-id {
+    padding-right: 15px;
+    font-weight: bold;
+  }
+  .cmd-usage {
+    display: inline-block;
+    padding: 0 5px;
+    font-family: monospace;
+    background-color: #ddd;
+  }
+</style>
+
+<%- include('../includes/footer'); -%>

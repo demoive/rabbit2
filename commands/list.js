@@ -1,40 +1,45 @@
 
 module.exports = {
 
-  desc: 'Lists all available commands. Optionally search the list.',
-
-  usage: 'list|ls [{search_terms}]',
+  name: 'List',
+  summary: 'Show/search all commands',
+  description: 'Lists all available commands. Optionally search the list.',
+  usage: 'list|ls [{search}]',
+  authors: ['paulo.avila@'],
 
   aliases: {
-    "^ls$" : "",
-    "^ls\\s+" : "",
+    "ls$" : "",
+    "ls\\s+" : "",
   },
 
-  exec: function (args) {
-    const rabbit2 = require('../rabbit2');
-    //const cmdDirectory = require('./');
-
+  run: function (inputArg) {
     var cmds = [];
-    var filterTerms = args.join('|');
 
+    const matchString = this.escapeRegexString(inputArg)
+      .split(/\s+/)
+      .join('|')
+    ;
 
-    Object.keys(rabbit2.cmdDirectory).forEach(function (cmdName) {
-      if (cmdName.match(filterTerms)) {
+    const matchRegexp = new RegExp(matchString, "gi");
+
+    Object.values(this.cmdDirectory).forEach(cmdObj => {
+      if (matchRegexp.test(`${cmdObj.id} ${cmdObj.name} ${cmdObj.summary} ${cmdObj.description}`)) {
         cmds.push({
-          name: cmdName,
-          usageCount: rabbit2.cmdUsageCount[cmdName] || 0,
-          desc: rabbit2.cmdDirectory[cmdName].desc,
-          usage: rabbit2.cmdDirectory[cmdName].usage,
-          //aliases: rabbit2.cmdDirectory[cmdName].aliases,
+          id: cmdObj.id,
+          name: cmdObj.name,
+          summary: cmdObj.summary,
+          description: cmdObj.description,
+          usage: cmdObj.usage,
+          authors: cmdObj.authors,
+          operators: cmdObj.operators,
+          //aliases: cmdObj.aliases,
+          hasRun: !!cmdObj.run, // Forces a boolean to avoid exposing the function itself.
+          hasSuggest: !!cmdObj.suggest, // Forces a boolean to avoid exposing the function itself.
         });
       }
     });
 
-    cmds.sort(function (a, b) {
-      return b.usageCount - a.usageCount;
-    });
-
-    rabbit2.serverResponse.render('list', { cmds });
+    this.renderView({ cmds });
   },
 
 };

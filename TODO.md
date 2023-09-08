@@ -1,0 +1,46 @@
+## Roadmap
+
+- ✅ chrome omnibox extension
+- ✅ add support for `suggest()` execution (for rapid searching)
+- ✅ async fetch support for external data (example: using Notion database)
+- ✅ remove pug dependency (use ejs.co)
+- ✅ view renderer abstraction and `includes/` to standardise header metadata
+- ✅ `wut` (glossary command)
+- ✅ `bk` (bookmark command): key-value store for "dummy" bookmarks
+- ✅ persistant db layer (crud api exposed for each command (lowdb? level?)
+- ✅ add `author` property in command
+- ✅ ~~add meta commands?~~ opted for .operators! (`{cmd}[.{operator}] {input}`)
+  - `bk` operators (`.new` `.list` `.update`)
+  - `drv` operators (`.new` `.doc` `.sheet` `.slides` `.form` `.email` `.cal`)
+  - `gs` migrate existing "options" to operators
+  - `ntn` (notion) --> `ntn.wut` replaces `wut`? extend to `.prd` and `.rfc`?
+- ✅ expose cookie() function to commands through rabbit2 api (read/set cookies)
+- private/hidden ("unlisted") commands - those starting with an underscore - don't appear is the listing
+- expose a convinience "suggest" [typeahead](https://twitter.github.io/typeahead.js/examples/) form in every commands view renderer? For example: wut
+- `go` support folders (via `/`?) and group filter in the list view
+- ❌ ~~`go` allow name-spaced by user id, giving preference if request is from matched user or allowing anyone to target that namespace <-- graceful solution to support "collisions"~~
+- remove `serverResponse`/`serverRequest` from global rabbit2 object
+- ✅ `html` (renders html): equivalent to: `data:text/html,<b>Hello World</b>`
+- ❌ ~~`fig` filter your recent files (operators: `.favs`, `.new`, `.jam`)~~ Figma API is limited (no "recent files" or "favourite files" endpoints)
+- authorisation via Google?
+- add a homepage (to replace the `list` default (render via markup2html?)
+- documentation:
+  - rabbit2 ethos (opinionated, no async api)
+  - anatomy of a command and input
+  - jsdoc (comment-parser, documentation, jsdoc-to-markdown, jsdoc-parse, jsdoc)
+  - https://engineering.linecorp.com/en/blog/api-documentation-comments-parsing/
+- installation instructions for firefox, safari.
+- package this up in a Chrome Extension to run locally?
+- credits/powered by/view source in list view
+- `/m/:cmdId.(:operators?)/` route to manage commands (`mv` to rename command/view/storage/cookies, `resetdb` to clear the db contents)
+
+### Dev
+  - is `/` a better input delimeter? (`{cmd}[.{operator}]/{input}`)
+    - facilitates auto-linking in certain scenarios
+  - add tests
+  - modernise it a bit with some more professional eyes
+  - typescriptify the repo
+  - set up on internal server
+  - contribution workflow
+  - notion documentation
+  - dedicated notion app api key

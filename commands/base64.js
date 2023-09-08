@@ -1,38 +1,34 @@
 
 module.exports = {
 
-  desc: 'Base64 encodes/decode a provided string.',
-
-  usage: 'base64|b64|b64d {source_string}',
+  name: 'Base64',
+  summary: 'Base64 encoder/decoder',
+  description: 'Base64 encodes/decode a provided string.',
+  usage: 'base64|atob|btoa {input}',
+  authors: ['paulo.avila@'],
 
   aliases: {
-     "^b64\\s+" : "",
-     "^atob\\s+" : "",
-     "^b64d\\s+" : "-d ",
-     "^btoa\\s+" : "-d ",
+    "atob\\s+" : "",
+    "btoa\\s+" : "-d ",
   },
 
-  exec: function (args) {
-    const rabbit2 = require('../rabbit2');
-
-    var argTokens = args.slice(); // Shallow copy of the args array (for a possible manipulation later).
-    var sourceString = '';
+  run: function (inputArg) {
+    var argTokens = inputArg.split(/^-d\s+/);
     var processedString = '';
 
-    if (argTokens.length >= 2 && argTokens[0] === '-d') {
+    // Encode ==> ['hello   world  ']
+    if (argTokens.length === 1) {
+      processedString = Buffer.from(argTokens[0]).toString('base64');
+    }
+    // Decode ==> ['', 'aGVsbG8gd29ybGQ=']
+    else {
       argTokens.shift();
-      sourceString = argTokens.join(' ');
-      processedString = Buffer.from(sourceString, 'base64').toString('ascii');
-    } else {
-      sourceString = argTokens.join(' ');
-      processedString = Buffer.from(sourceString).toString('base64');
+      processedString = Buffer.from(argTokens[0], 'base64').toString('ascii');
     }
 
     // Serves a page which displays the encoded string along with a convinient "copy to clipboard" button
-    rabbit2.serverResponse
-      .render('base64', { encodedString: processedString });
-    //rabbit2.serverResponse.send(processedString);
-
+    this.renderView({ processedString: processedString });
+    // return processedString;
   },
 
 };

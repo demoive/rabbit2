@@ -1,16 +1,15 @@
 
 module.exports = {
 
-  desc: 'Returns back what you give to it.',
+  name: 'Echo',
+  summary: 'Feeling lonely?',
+  description: 'Returns back what you give to it.',
+  usage: 'echo {string}',
+  authors: ['paulo.avila@'],
 
-  usage: 'echo {content_to_reply}',
-
-  aliases: {
-  },
-
-  exec: function (args) {
-    const rabbit2 = require('../rabbit2');
-    rabbit2.serverResponse.send(args.join(' '));
+  run: function (inputArg) {
+    //return inputArg;
+    this.renderView({ inputString: inputArg });
   },
 
 };

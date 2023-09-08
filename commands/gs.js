@@ -13,39 +13,41 @@ var cmdOptSearchFilterMapping = {
 var cmdOpts = Object.keys(cmdOptSearchFilterMapping);
 
 var aliases = {};
-aliases['^gs$'] = "";
-aliases['^gs\\s+'] = "";
-aliases[`^gs(${cmdOpts.join('|')})?\\s+`] = "-$1 ";
+// aliases['gs$'] = "";
+// aliases['gs\\s+'] = "";
+aliases[`gs(${cmdOpts.join('|')})\\s+`] = "-$1 ";
 
 
 module.exports = {
 
-  desc: 'Global / G Suite search. Searches across your entire Google Workspace, with optional filters.',
-
-  usage: 'gsuite|gs|gs' + cmdOpts.join('|gs') + ' [{search_terms}]',
+  name: 'Google Workspace search',
+  summary: 'Search Gmail/Drive/Calendar/Groups/etc.',
+  description: 'Search across your entire Google Workspace, with optional filters.',
+  usage: 'gs|gs' + cmdOpts.join('|gs') + ' {search}',
+  authors: ['paulo.avila@'],
 
   aliases: aliases,
 
-  exec: function (args) {
-    var cmdArgs = args.slice(); // Shallow copy of the args array (for a possible manipulation later).
-
-    var searchUrl = `${REDIRECT_URL_SEARCH}?`;
-
-    if (cmdArgs.length === 0) {
+  run: function (inputArg) {
+    if (!inputArg) {
       return REDIRECT_URL;
     }
+    
+    var inputArgTokens = inputArg.split(/\s+/);
 
     // Handle if the first argument is a valid command option.
     var optionCodeRegEx = new RegExp(`^-(${cmdOpts.join('|')})$`);
-    var cmdOptTest = optionCodeRegEx.exec(cmdArgs[0]);
+    var cmdOptTest = optionCodeRegEx.exec(inputArgTokens[0]);
 
-    if (cmdOptTest && cmdArgs.length >= 2) {
-      cmdArgs.shift();
+    var searchUrl = `${REDIRECT_URL_SEARCH}?`;
+
+    if (cmdOptTest && inputArgTokens.length >= 2) {
+      inputArgTokens.shift();
 
       searchUrl = `${searchUrl}${REDIRECT_URL_SEARCH_FILTER_QUERY_PARAM}=${cmdOptSearchFilterMapping[cmdOptTest[1]]}&`;
     }
 
-    var searchTerms = encodeURIComponent(cmdArgs.join(' '));
+    var searchTerms = encodeURIComponent(inputArgTokens.join(' '));
 
     return `${searchUrl}q=${searchTerms}`;
   },

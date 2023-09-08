@@ -1,0 +1,12 @@
+<%- include('../includes/header'); -%>
+
+<script>
+  var projNum = "<%- data.issueNumber %>";
+  var projKey = prompt('What is your project key?');
+
+  if (projKey) {
+    location.href = `${location.origin}/?<%- cmdObj.id %> ${projKey}-${projNum}`;
+  }
+</script>
+
+<%- include('../includes/footer'); -%>

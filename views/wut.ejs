@@ -1,0 +1,31 @@
+<%- include('../includes/header'); -%>
+
+<table>
+  <tr>
+    <th>Acronym</th>
+    <th>Term</th>
+    <th>Description</th>
+  </tr>
+
+  <% for (let entry of data.searchResultsClean) { %>
+    <tr>
+
+      <td style="vertical-align:top;">
+        <b><a href="<%- entry.entryUrl %>"><%- entry.entryCol.Acronym %></a><b>
+      </td>
+
+      <td style="vertical-align:top;">
+        <%= entry.entryCol.Term %>
+      </td>
+
+      <td>
+        <span style="color:grey;">
+          <%- entry.entryCol.Description.replace(/\n/g, '<br>') %>
+        </span>
+      </td>
+
+    </tr>
+  <% } %>
+</table>
+
+<%- include('../includes/footer'); -%>

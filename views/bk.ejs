@@ -1,0 +1,70 @@
+<%- include('../includes/header'); -%>
+
+<style>
+  p {
+    margin: 0;
+    white-space: nowrap;
+    font-family: monospace;
+  }
+</style>
+
+<% if (data.html) { %>
+  <%- data.html %>
+<% } %>
+  
+<% if (data.list) { %>
+  
+  <!--
+  https://stackoverflow.com/a/3414427 -->
+  <select>
+    <!--
+    <optgroup label="Filters">
+      <option>me</option>
+    </optgroup>
+    -->
+    <optgroup label="/team/prod/domains">
+    <option value="/team/prod/domains" selected>/ (834)</option>
+    <option value="/team/prod/domains/finance">/finance (43)</option>
+    <option value="/team/prod/domains/core">/core (12)</option>
+      <option value="/team/prod/domains/paroll">/payroll (12)</option>
+    </optgroup>
+  </select>
+  
+  <% for (let entry of data.list) { %>
+    <p title="<%= entry.bkOwner %>">
+      <%= entry.bkName %>
+      →
+      <a
+        title="(<%= entry.bkUrlVersion %>) <%= (new Date(entry.bkModified)) %>"
+        href="<%= entry.bkUrl %>"
+      >
+        <%= entry.bkUrl %>
+      </a>
+    </p>
+  <% } %>
+<% } %>
+
+<script>
+  <% if (data.alert) { %>
+    alert(`<%- data.alert %>`);
+  <% } %>
+
+  <% if (data.prompt) { %>
+    var responseVal = prompt(`<%- data.prompt %>`);
+
+    if (responseVal) {
+      let leftToken = responseVal;
+      let rightToken = "<%- data.val || '' %>";
+
+      if ("<%= data.key %>") {
+        leftToken = "<%- data.key %>";
+        rightToken = responseVal;
+      }
+
+      location.href = `${location.origin}/?<%- cmdObj.id %>.new ${leftToken} ${encodeURIComponent(rightToken)}`;
+    }
+  <% } %>
+
+</script>
+
+<%- include('../includes/footer'); -%>
